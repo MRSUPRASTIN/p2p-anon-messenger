@@ -1,0 +1,21 @@
+# build artefacts
+build/
+dist/
+
+# dependencies
+node_modules/
+
+# vendored build tool, see tools/after-pack.js
+tools/bin/
+
+# logs and leftovers
+*.log
+*.tmp
+*.blockmap
+Thumbs.db
+desktop.ini
+.DS_Store
+
+# never commit a profile: it holds real contacts and real messages
+*.profile/
+userData/

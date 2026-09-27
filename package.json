@@ -1,0 +1,66 @@
+{
+  "name": "p2p-anon-messenger",
+  "productName": "p2pAnon Messenger",
+  "version": "1.0.0",
+  "description": "P2P messenger without a server: WebRTC DataChannel, LAN discovery, invite codes.",
+  "main": "src/main/main.js",
+  "author": "MRSUPRASTIN",
+  "license": "AGPL-3.0",
+  "private": true,
+  "scripts": {
+    "start": "electron .",
+    "icon": "node tools/make-icon.js",
+    "dist": "npm run icon && electron-builder --win --x64",
+    "pack": "npm run icon && electron-builder --win --dir",
+    "pair": "node tools/pair.js",
+    "smoke": "node tools/smoke.js",
+    "invite": "node tools/invite.js",
+    "shots": "node tools/shots.js",
+    "test": "node tools/smoke.js && node tools/pair.js && node tools/pair.js --same-port && node tools/invite.js"
+  },
+  "devDependencies": {
+    "electron": "^33.2.0",
+    "electron-builder": "^25.1.8"
+  },
+  "build": {
+    "appId": "com.p2panon.messenger",
+    "productName": "p2pAnon Messenger",
+    "asar": true,
+    "afterPack": "tools/after-pack.js",
+    "files": [
+      "src/**/*",
+      "build/icon.png",
+      "package.json"
+    ],
+    "directories": {
+      "output": "dist",
+      "buildResources": "build"
+    },
+    "win": {
+      "target": [
+        {
+          "target": "nsis",
+          "arch": [
+            "x64"
+          ]
+        }
+      ],
+      "icon": "build/icon.ico",
+      "signAndEditExecutable": false,
+      "artifactName": "p2pAnonMessenger-${version}-Setup.${ext}"
+    },
+    "nsis": {
+      "oneClick": false,
+      "perMachine": false,
+      "allowToChangeInstallationDirectory": true,
+      "createDesktopShortcut": true,
+      "createStartMenuShortcut": true,
+      "shortcutName": "p2pAnon Messenger"
+    }
+  },
+  "homepage": "https://github.com/MRSUPRASTIN/p2p-anon-messenger",
+  "repository": {
+    "type": "git",
+    "url": "https://github.com/MRSUPRASTIN/p2p-anon-messenger.git"
+  }
+}
